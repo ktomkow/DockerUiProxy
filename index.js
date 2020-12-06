@@ -1,4 +1,3 @@
-const { default: Axios } = require('axios');
 const axios = require('axios');
 const express = require('express');
 const app = express();
@@ -8,14 +7,27 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+app.get('/healtcheck', (req, res) => {
+  res.send({ message: 'Works' });
+});
+
 app.get('/passOn/:addressInBase64', (req, res) => {
   const addressInBase64 = req.params.addressInBase64;
   let buff = new Buffer.from(addressInBase64, 'base64');
   const address = buff.toString('ascii');
 
-  axios.get(address).then((response) => {
-    res.send(response.data);
-  });
+  axios
+    .get(address)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
+      const errorStatusCode = error.response.status;
+      res.status(errorStatusCode).send({
+        message: `Something gone wrong`,
+        statusCode: errorStatusCode
+      });
+    });
 });
 
 app.listen(port, () => {
