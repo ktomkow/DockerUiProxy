@@ -1,7 +1,6 @@
 FROM node:lts
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci --silent
 COPY . ./
+RUN npm ci --silent
 EXPOSE 4999
 CMD ["node", "index.js"]
