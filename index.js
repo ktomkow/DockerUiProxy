@@ -21,5 +21,5 @@ app.get('/passOn/:addressInBase64', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Docker local registry proxy starts on http://localhost:${port}`);
 });
