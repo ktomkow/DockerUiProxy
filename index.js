@@ -13,10 +13,8 @@ app.get('/passOn/:addressInBase64', (req, res) => {
   let buff = new Buffer.from(addressInBase64, 'base64');
   const address = buff.toString('ascii');
 
-  axios.get('http://192.168.0.133:9997/v2/_catalog/') // change this address
-    .then((response) => {
-      // res.send(response.data);
-      res.send(address);
+  axios.get(address).then((response) => {
+    res.send(response.data);
   });
 });
 
