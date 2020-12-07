@@ -1,7 +1,12 @@
 const axios = require('axios');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 4999;
+
+app.use(cors({
+  origin: "*"
+}))
 
 app.get('/healtcheck', (req, res) => {
   res.send({ message: 'Works' });
